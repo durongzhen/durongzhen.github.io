@@ -1,6 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>移动吉比特gs3101光猫破解+桥接教程</title>
+    <url>/2020/04/04/gs3101/</url>
+    <content><![CDATA[<blockquote>
+<p>该类型光猫通用超级账户如下： 管理员账号：CMCCAdmin 密码：aDm8H%MdA</p>
+</blockquote>
+<p>该账户无效的话是移动下发参数时修改了默认超密，需要通过破解拿到最新密码。</p>
+<h2 id="破解过程："><a href="#破解过程：" class="headerlink" title="破解过程："></a>破解过程：</h2><p>1.开启telnet</p>
+<p>开telnet权限地址：<a href="http://192.168.1.1/cgi-bin/getGateWay.cgi" target="_blank" rel="noopener">http://192.168.1.1/cgi-bin/getGateWay.cgi</a></p>
+<p>telnet账号密码</p>
+<p>telnet_username=”admin”</p>
+<p>telnet_passwd=”s2@We3%Dc#”</p>
+<a id="more"></a>
+
+<p>2.使用telnet登陆查看配置文件</p>
+<p>登陆：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">telnet 192.168.1.1</span><br></pre></td></tr></table></figure>
+
+<p>进入该目录：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /boaroot/html</span><br></pre></td></tr></table></figure>
+
+<p>查看配置文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat romfile.cfg</span><br></pre></td></tr></table></figure>
+
+<p>3.复制另存romfile.cfg文件内容</p>
+<p>查找cmccadmin 即可看到密码</p>
+<p>4.使用超密账号登陆即可看到宽带账号密码。</p>
+<p>参考：</p>
+<p><a href="https://www.right.com.cn/forum/thread-415706-1-1.html" target="_blank" rel="noopener">https://www.right.com.cn/forum/thread-415706-1-1.html</a></p>
+<p><a href="https://www.52pojie.cn/thread-1094265-2-1.html" target="_blank" rel="noopener">https://www.52pojie.cn/thread-1094265-2-1.html</a></p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>gs3101</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Centos7在线安装MySQL5.7</title>
     <url>/2020/04/04/Centos7%E5%9C%A8%E7%BA%BF%E5%AE%89%E8%A3%85MySQL5-7/</url>
     <content><![CDATA[<h3 id="一、-下载并安装MySQL官方的-Yum-Repository"><a href="#一、-下载并安装MySQL官方的-Yum-Repository" class="headerlink" title="一、 下载并安装MySQL官方的 Yum Repository"></a>一、 下载并安装MySQL官方的 Yum Repository</h3><pre><code>`wget -i -c http://dev.mysql.com/get/mysql57-community-release-el7-10.noarch.rpm`</code></pre><ul>
@@ -44,49 +82,6 @@
       </categories>
       <tags>
         <tag>mysql5.7</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>分享一个好用的jar包执行脚本</title>
-    <url>/2020/04/04/bash-jar/</url>
-    <content><![CDATA[<blockquote>
-<p>适合执行jar包使用</p>
-</blockquote>
-<ul>
-<li><h3 id="vim新建文件run，复制以下脚本内容"><a href="#vim新建文件run，复制以下脚本内容" class="headerlink" title="vim新建文件run，复制以下脚本内容"></a>vim新建文件run，复制以下脚本内容</h3></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#这里可替换为你自己的执行程序，其他代码无需更改</span></span><br><span class="line">APP_NAME = XXX.jar</span><br><span class="line"> </span><br><span class="line"><span class="comment">#使用说明，用来提示输入参数</span></span><br><span class="line"><span class="function"><span class="title">usage</span></span>() &#123;</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"Usage: sh 执行脚本.sh [start|stop|restart|status]"</span></span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">#检查程序是否在运行</span></span><br><span class="line"><span class="function"><span class="title">is_exist</span></span>()&#123;</span><br><span class="line">  pid=`ps -ef|grep <span class="variable">$APP_NAME</span>|grep -v grep|awk <span class="string">'&#123;print $2&#125;'</span> `</span><br><span class="line">  <span class="comment">#如果不存在返回1，存在返回0     </span></span><br><span class="line">  <span class="keyword">if</span> [ -z <span class="string">"<span class="variable">$&#123;pid&#125;</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">   <span class="built_in">return</span> 1</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="built_in">return</span> 0</span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<a id="more"></a>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#启动方法</span></span><br><span class="line"><span class="function"><span class="title">start</span></span>()&#123;</span><br><span class="line">  is_exist</span><br><span class="line">  <span class="keyword">if</span> [ $? -eq <span class="string">"0"</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"<span class="variable">$&#123;APP_NAME&#125;</span> is already running. pid=<span class="variable">$&#123;pid&#125;</span> ."</span></span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    nohup java -jar <span class="variable">$APP_NAME</span> &gt; /dev/null 2&gt;&amp;1 &amp;</span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">#停止方法</span></span><br><span class="line"><span class="function"><span class="title">stop</span></span>()&#123;</span><br><span class="line">  is_exist</span><br><span class="line">  <span class="keyword">if</span> [ $? -eq <span class="string">"0"</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">kill</span> -9 <span class="variable">$pid</span></span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"<span class="variable">$&#123;APP_NAME&#125;</span> is not running"</span></span><br><span class="line">  <span class="keyword">fi</span>  </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">#输出运行状态</span></span><br><span class="line"><span class="function"><span class="title">status</span></span>()&#123;</span><br><span class="line">  is_exist</span><br><span class="line">  <span class="keyword">if</span> [ $? -eq <span class="string">"0"</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"<span class="variable">$&#123;APP_NAME&#125;</span> is running. Pid is <span class="variable">$&#123;pid&#125;</span>"</span></span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"<span class="variable">$&#123;APP_NAME&#125;</span> is NOT running."</span></span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">#重启</span></span><br><span class="line"><span class="function"><span class="title">restart</span></span>()&#123;</span><br><span class="line">  stop</span><br><span class="line">  start</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">#根据输入参数，选择执行对应方法，不输入则执行使用说明</span></span><br><span class="line"><span class="keyword">case</span> <span class="string">"<span class="variable">$1</span>"</span> <span class="keyword">in</span></span><br><span class="line">  <span class="string">"start"</span>)</span><br><span class="line">    start</span><br><span class="line">    ;;</span><br><span class="line">  <span class="string">"stop"</span>)</span><br><span class="line">    stop</span><br><span class="line">    ;;</span><br><span class="line">  <span class="string">"status"</span>)</span><br><span class="line">    status</span><br><span class="line">    ;;</span><br><span class="line">  <span class="string">"restart"</span>)</span><br><span class="line">    restart</span><br><span class="line">    ;;</span><br><span class="line">  *)</span><br><span class="line">    usage</span><br><span class="line">    ;;</span><br><span class="line"><span class="keyword">esac</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><h3 id="给run文件赋予权限"><a href="#给run文件赋予权限" class="headerlink" title="给run文件赋予权限"></a>给run文件赋予权限</h3><p>  <code>chmod 777 run</code></p>
-</li>
-<li><h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3></li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>启动</th>
-<th>关闭</th>
-<th>重启</th>
-<th>状态</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>./run start</code></td>
-<td><code>./run stop</code></td>
-<td><code>./run restart</code></td>
-<td><code>./run status</code></td>
-</tr>
-</tbody></table>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>脚本</tag>
       </tags>
   </entry>
   <entry>
@@ -312,41 +307,46 @@
       </tags>
   </entry>
   <entry>
-    <title>移动吉比特gs3101光猫破解+桥接教程</title>
-    <url>/2020/04/04/gs3101/</url>
+    <title>分享一个好用的jar包执行脚本</title>
+    <url>/2020/04/04/bash-jar/</url>
     <content><![CDATA[<blockquote>
-<p>该类型光猫通用超级账户如下： 管理员账号：CMCCAdmin 密码：aDm8H%MdA</p>
+<p>适合执行jar包使用</p>
 </blockquote>
-<p>该账户无效的话是移动下发参数时修改了默认超密，需要通过破解拿到最新密码。</p>
-<h2 id="破解过程："><a href="#破解过程：" class="headerlink" title="破解过程："></a>破解过程：</h2><p>1.开启telnet</p>
-<p>开telnet权限地址：<a href="http://192.168.1.1/cgi-bin/getGateWay.cgi" target="_blank" rel="noopener">http://192.168.1.1/cgi-bin/getGateWay.cgi</a></p>
-<p>telnet账号密码</p>
-<p>telnet_username=”admin”</p>
-<p>telnet_passwd=”s2@We3%Dc#”</p>
+<ul>
+<li><h3 id="vim新建文件run，复制以下脚本内容"><a href="#vim新建文件run，复制以下脚本内容" class="headerlink" title="vim新建文件run，复制以下脚本内容"></a>vim新建文件run，复制以下脚本内容</h3></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#这里可替换为你自己的执行程序，其他代码无需更改</span></span><br><span class="line">APP_NAME = XXX.jar</span><br><span class="line"> </span><br><span class="line"><span class="comment">#使用说明，用来提示输入参数</span></span><br><span class="line"><span class="function"><span class="title">usage</span></span>() &#123;</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"Usage: sh 执行脚本.sh [start|stop|restart|status]"</span></span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">#检查程序是否在运行</span></span><br><span class="line"><span class="function"><span class="title">is_exist</span></span>()&#123;</span><br><span class="line">  pid=`ps -ef|grep <span class="variable">$APP_NAME</span>|grep -v grep|awk <span class="string">'&#123;print $2&#125;'</span> `</span><br><span class="line">  <span class="comment">#如果不存在返回1，存在返回0     </span></span><br><span class="line">  <span class="keyword">if</span> [ -z <span class="string">"<span class="variable">$&#123;pid&#125;</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">   <span class="built_in">return</span> 1</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="built_in">return</span> 0</span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <a id="more"></a>
 
-<p>2.使用telnet登陆查看配置文件</p>
-<p>登陆：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">telnet 192.168.1.1</span><br></pre></td></tr></table></figure>
-
-<p>进入该目录：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /boaroot/html</span><br></pre></td></tr></table></figure>
-
-<p>查看配置文件</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat romfile.cfg</span><br></pre></td></tr></table></figure>
-
-<p>3.复制另存romfile.cfg文件内容</p>
-<p>查找cmccadmin 即可看到密码</p>
-<p>4.使用超密账号登陆即可看到宽带账号密码。</p>
-<p>参考：</p>
-<p><a href="https://www.right.com.cn/forum/thread-415706-1-1.html" target="_blank" rel="noopener">https://www.right.com.cn/forum/thread-415706-1-1.html</a></p>
-<p><a href="https://www.52pojie.cn/thread-1094265-2-1.html" target="_blank" rel="noopener">https://www.52pojie.cn/thread-1094265-2-1.html</a></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#启动方法</span></span><br><span class="line"><span class="function"><span class="title">start</span></span>()&#123;</span><br><span class="line">  is_exist</span><br><span class="line">  <span class="keyword">if</span> [ $? -eq <span class="string">"0"</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"<span class="variable">$&#123;APP_NAME&#125;</span> is already running. pid=<span class="variable">$&#123;pid&#125;</span> ."</span></span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    nohup java -jar <span class="variable">$APP_NAME</span> &gt; /dev/null 2&gt;&amp;1 &amp;</span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">#停止方法</span></span><br><span class="line"><span class="function"><span class="title">stop</span></span>()&#123;</span><br><span class="line">  is_exist</span><br><span class="line">  <span class="keyword">if</span> [ $? -eq <span class="string">"0"</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">kill</span> -9 <span class="variable">$pid</span></span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"<span class="variable">$&#123;APP_NAME&#125;</span> is not running"</span></span><br><span class="line">  <span class="keyword">fi</span>  </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">#输出运行状态</span></span><br><span class="line"><span class="function"><span class="title">status</span></span>()&#123;</span><br><span class="line">  is_exist</span><br><span class="line">  <span class="keyword">if</span> [ $? -eq <span class="string">"0"</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"<span class="variable">$&#123;APP_NAME&#125;</span> is running. Pid is <span class="variable">$&#123;pid&#125;</span>"</span></span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"<span class="variable">$&#123;APP_NAME&#125;</span> is NOT running."</span></span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">#重启</span></span><br><span class="line"><span class="function"><span class="title">restart</span></span>()&#123;</span><br><span class="line">  stop</span><br><span class="line">  start</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">#根据输入参数，选择执行对应方法，不输入则执行使用说明</span></span><br><span class="line"><span class="keyword">case</span> <span class="string">"<span class="variable">$1</span>"</span> <span class="keyword">in</span></span><br><span class="line">  <span class="string">"start"</span>)</span><br><span class="line">    start</span><br><span class="line">    ;;</span><br><span class="line">  <span class="string">"stop"</span>)</span><br><span class="line">    stop</span><br><span class="line">    ;;</span><br><span class="line">  <span class="string">"status"</span>)</span><br><span class="line">    status</span><br><span class="line">    ;;</span><br><span class="line">  <span class="string">"restart"</span>)</span><br><span class="line">    restart</span><br><span class="line">    ;;</span><br><span class="line">  *)</span><br><span class="line">    usage</span><br><span class="line">    ;;</span><br><span class="line"><span class="keyword">esac</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><h3 id="给run文件赋予权限"><a href="#给run文件赋予权限" class="headerlink" title="给run文件赋予权限"></a>给run文件赋予权限</h3><p>  <code>chmod 777 run</code></p>
+</li>
+<li><h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>启动</th>
+<th>关闭</th>
+<th>重启</th>
+<th>状态</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>./run start</code></td>
+<td><code>./run stop</code></td>
+<td><code>./run restart</code></td>
+<td><code>./run status</code></td>
+</tr>
+</tbody></table>
 ]]></content>
       <categories>
         <category>教程</category>
       </categories>
       <tags>
-        <tag>gs3101</tag>
+        <tag>脚本</tag>
       </tags>
   </entry>
   <entry>
@@ -379,49 +379,6 @@
       </categories>
       <tags>
         <tag>nohup</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>安装vlmcsd搭建KMS服务器</title>
-    <url>/2020/04/04/%E5%AE%89%E8%A3%85vlmcsd%E6%90%AD%E5%BB%BAKMS%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
-    <content><![CDATA[<blockquote>
-<p>vlmcsd搭建的KMS激活服务器，可以激活Windows和office（VL版）<br>微软原版镜像下载地址：<a href="https://msdn.itellyou.cn/" target="_blank" rel="noopener" title="https://msdn.itellyou.cn/">https://msdn.itellyou.cn/</a></p>
-</blockquote>
-<h3 id="搭建步骤："><a href="#搭建步骤：" class="headerlink" title="搭建步骤："></a>搭建步骤：</h3><ul>
-<li>下载vlmcsd文件：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://github.com/Wind4/vlmcsd/releases/download/svn1112/binaries.tar.gz</span><br></pre></td></tr></table></figure></li>
-<li>解压：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -xzvf binaries.tar.gz</span><br></pre></td></tr></table></figure></li>
-<li>进入目录：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> binaries/Linux/intel/static</span><br></pre></td></tr></table></figure></li>
-<li>64位系统执行：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./vlmcsd-x64-musl-static</span><br></pre></td></tr></table></figure></li>
-<li>查看vlmcsd运行状态：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ps -ef | grep vlmcsd-x64-musl-static</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-
-</li>
-</ul>
-<p><strong><em>注意：vlmcsd需要用到1688端口，如果你的机器防火墙打开了，需要设置放行规则或者关闭防火墙。</em></strong></p>
-<h3 id="使用步骤："><a href="#使用步骤：" class="headerlink" title="使用步骤："></a>使用步骤：</h3><p>在需要激活的电脑上以管理员运行cmd，输入以下指令。</p>
-<h4 id="Windows激活步骤："><a href="#Windows激活步骤：" class="headerlink" title="Windows激活步骤："></a>Windows激活步骤：</h4><ol>
-<li><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">slmgr /skms 这里填写你的VPS公网IP或是解析到此IP的域名</span><br></pre></td></tr></table></figure></li>
-<li><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">slmgr /ato</span><br></pre></td></tr></table></figure></li>
-<li><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">slmgr /xpr</span><br></pre></td></tr></table></figure>
-重启即可激活。</li>
-</ol>
-<h4 id="Office激活步骤："><a href="#Office激活步骤：" class="headerlink" title="Office激活步骤："></a>Office激活步骤：</h4><ul>
-<li><p>找到你的office安装目录，比如C:\Program Files (x86)\Microsoft Office\Office16</p>
-<p>  该目录下面应该有个OSPP.VBS，接下来我们就cd到这个目录下面。</p>
-  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> C:\Program Files (x86)\Microsoft Office\Office16</span><br></pre></td></tr></table></figure></li>
-<li><p>执行注册kms服务器地址：</p>
-  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cscript ospp.vbs /sethst:这里填写你的VPS公网IP或是解析到此IP的域名</span><br></pre></td></tr></table></figure></li>
-<li><p>一般来说，“一句命令已经完成了”，但一般office不会马上连接kms服务器进行激活，所以我们额外补充一条手动激活命令：</p>
-  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cscript ospp.vbs /act</span><br></pre></td></tr></table></figure>
-<p>  如果提示看到successful的字样，那么就是激活成功了，重新打开office就好。</p>
-</li>
-</ul>
-<h3 id="注意：你的Windows-OFFICE一定要是VL版本才能被激活！"><a href="#注意：你的Windows-OFFICE一定要是VL版本才能被激活！" class="headerlink" title="注意：你的Windows/OFFICE一定要是VL版本才能被激活！"></a>注意：你的Windows/OFFICE一定要是VL版本才能被激活！</h3>]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>vlmcsd</tag>
       </tags>
   </entry>
   <entry>
@@ -474,6 +431,49 @@
       </categories>
       <tags>
         <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>安装vlmcsd搭建KMS服务器</title>
+    <url>/2020/04/04/%E5%AE%89%E8%A3%85vlmcsd%E6%90%AD%E5%BB%BAKMS%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
+    <content><![CDATA[<blockquote>
+<p>vlmcsd搭建的KMS激活服务器，可以激活Windows和office（VL版）<br>微软原版镜像下载地址：<a href="https://msdn.itellyou.cn/" target="_blank" rel="noopener" title="https://msdn.itellyou.cn/">https://msdn.itellyou.cn/</a></p>
+</blockquote>
+<h3 id="搭建步骤："><a href="#搭建步骤：" class="headerlink" title="搭建步骤："></a>搭建步骤：</h3><ul>
+<li>下载vlmcsd文件：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://github.com/Wind4/vlmcsd/releases/download/svn1112/binaries.tar.gz</span><br></pre></td></tr></table></figure></li>
+<li>解压：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -xzvf binaries.tar.gz</span><br></pre></td></tr></table></figure></li>
+<li>进入目录：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> binaries/Linux/intel/static</span><br></pre></td></tr></table></figure></li>
+<li>64位系统执行：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./vlmcsd-x64-musl-static</span><br></pre></td></tr></table></figure></li>
+<li>查看vlmcsd运行状态：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ps -ef | grep vlmcsd-x64-musl-static</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+
+</li>
+</ul>
+<p><strong><em>注意：vlmcsd需要用到1688端口，如果你的机器防火墙打开了，需要设置放行规则或者关闭防火墙。</em></strong></p>
+<h3 id="使用步骤："><a href="#使用步骤：" class="headerlink" title="使用步骤："></a>使用步骤：</h3><p>在需要激活的电脑上以管理员运行cmd，输入以下指令。</p>
+<h4 id="Windows激活步骤："><a href="#Windows激活步骤：" class="headerlink" title="Windows激活步骤："></a>Windows激活步骤：</h4><ol>
+<li><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">slmgr /skms 这里填写你的VPS公网IP或是解析到此IP的域名</span><br></pre></td></tr></table></figure></li>
+<li><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">slmgr /ato</span><br></pre></td></tr></table></figure></li>
+<li><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">slmgr /xpr</span><br></pre></td></tr></table></figure>
+重启即可激活。</li>
+</ol>
+<h4 id="Office激活步骤："><a href="#Office激活步骤：" class="headerlink" title="Office激活步骤："></a>Office激活步骤：</h4><ul>
+<li><p>找到你的office安装目录，比如C:\Program Files (x86)\Microsoft Office\Office16</p>
+<p>  该目录下面应该有个OSPP.VBS，接下来我们就cd到这个目录下面。</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> C:\Program Files (x86)\Microsoft Office\Office16</span><br></pre></td></tr></table></figure></li>
+<li><p>执行注册kms服务器地址：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cscript ospp.vbs /sethst:这里填写你的VPS公网IP或是解析到此IP的域名</span><br></pre></td></tr></table></figure></li>
+<li><p>一般来说，“一句命令已经完成了”，但一般office不会马上连接kms服务器进行激活，所以我们额外补充一条手动激活命令：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cscript ospp.vbs /act</span><br></pre></td></tr></table></figure>
+<p>  如果提示看到successful的字样，那么就是激活成功了，重新打开office就好。</p>
+</li>
+</ul>
+<h3 id="注意：你的Windows-OFFICE一定要是VL版本才能被激活！"><a href="#注意：你的Windows-OFFICE一定要是VL版本才能被激活！" class="headerlink" title="注意：你的Windows/OFFICE一定要是VL版本才能被激活！"></a>注意：你的Windows/OFFICE一定要是VL版本才能被激活！</h3>]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>vlmcsd</tag>
       </tags>
   </entry>
 </search>
