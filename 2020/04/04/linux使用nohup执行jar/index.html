@@ -20,17 +20,20 @@
     var CONFIG = {"hostname":"durongzhen.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="世事漫随流水，算来一梦浮生">
-<meta property="og:type" content="website">
-<meta property="og:title" content="港湾小站">
-<meta property="og:url" content="https://durongzhen.github.io/archives/2020/index.html">
+  <meta name="description" content="1java -jar XXX.jar &amp;  命令结尾没有 “&amp;”，则变成 “java -jar XXX.jar，表示在当前ssh窗口，可按CTRL + C打断程序运行，或者直接关闭窗口，则程序直接退出。 命令结尾添加 “&amp;” ，则变成 “java -jar XXX.jar &amp;”，表示在当窗口关闭时，程序才会中止运行。&amp;代表让该命令在后台执行。  123noh">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux使用nohup执行jar">
+<meta property="og:url" content="https://durongzhen.github.io/2020/04/04/linux%E4%BD%BF%E7%94%A8nohup%E6%89%A7%E8%A1%8Cjar/index.html">
 <meta property="og:site_name" content="港湾小站">
-<meta property="og:description" content="世事漫随流水，算来一梦浮生">
+<meta property="og:description" content="1java -jar XXX.jar &amp;  命令结尾没有 “&amp;”，则变成 “java -jar XXX.jar，表示在当前ssh窗口，可按CTRL + C打断程序运行，或者直接关闭窗口，则程序直接退出。 命令结尾添加 “&amp;” ，则变成 “java -jar XXX.jar &amp;”，表示在当窗口关闭时，程序才会中止运行。&amp;代表让该命令在后台执行。  123noh">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-04T08:35:24.000Z">
+<meta property="article:modified_time" content="2020-04-04T09:32:17.086Z">
 <meta property="article:author" content="durongzhen">
+<meta property="article:tag" content="nohup">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://durongzhen.github.io/archives/2020/">
+<link rel="canonical" href="https://durongzhen.github.io/2020/04/04/linux%E4%BD%BF%E7%94%A8nohup%E6%89%A7%E8%A1%8Cjar/">
 
 
 <script id="page-configurations">
@@ -38,12 +41,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>归档 | 港湾小站</title>
+  <title>linux使用nohup执行jar | 港湾小站</title>
   
 
 
@@ -185,170 +188,147 @@
         <div class="content-wrap">
           
 
-          <div class="content archive">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 7 篇日志。 继续努力。</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://durongzhen.github.io/2020/04/04/linux%E4%BD%BF%E7%94%A8nohup%E6%89%A7%E8%A1%8Cjar/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="durongzhen">
+      <meta itemprop="description" content="世事漫随流水，算来一梦浮生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="港湾小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          linux使用nohup执行jar
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-04-04 16:35:24 / 修改时间：17:32:17" itemprop="dateCreated datePublished" datetime="2020-04-04T16:35:24+08:00">2020-04-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2020</span>
-    </div>
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar XXX.jar &amp;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>命令结尾没有 “&amp;”，则变成 “java -jar XXX.jar，表示在当前ssh窗口，可按CTRL + C打断程序运行，或者直接关闭窗口，则程序直接退出。</li>
+<li>命令结尾添加 “&amp;” ，则变成 “java -jar XXX.jar &amp;”，表示在当窗口关闭时，程序才会中止运行。&amp;代表让该命令在后台执行。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar XXX.jar &gt; Log.log &amp; </span><br><span class="line">或者</span><br><span class="line">nohup java -jar XXX.jar &gt;&gt; Log.log &amp;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>命令 “nohup java -jar XXX.jar &amp;” 部分，表示不挂断运行命令,当账户退出或终端关闭时,程序仍然运行。注意，该作业的所有输出被重定向到nohup.out的文件中。</li>
+<li>命令 “nohup java -jar XXX.jar &gt; Log.log &amp;” 部分，表示不挂断运行命令,当账户退出或终端关闭时,程序仍然运行，并且该作业的所有输出被重定向到Log.log的文件中。“ &gt; Log.log ” 该命令就是指定日志输出的文件。</li>
+<li>“&gt;&gt;”表示将输出以追加的方式重定向到Log.log中。</li>
+</ul>
+<a id="more"></a>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-04T16:35:24+08:00"
-              content="2020-04-04">
-          04-04
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/04/04/linux%E4%BD%BF%E7%94%A8nohup%E6%89%A7%E8%A1%8Cjar/" itemprop="url">
-            <span itemprop="name">linux使用nohup执行jar</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-04T16:30:26+08:00"
-              content="2020-04-04">
-          04-04
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/04/04/%E5%AE%89%E8%A3%85vlmcsd%E6%90%AD%E5%BB%BAKMS%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url">
-            <span itemprop="name">安装vlmcsd搭建KMS服务器</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-04T16:27:51+08:00"
-              content="2020-04-04">
-          04-04
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/04/04/Centos7%E5%9C%A8%E7%BA%BF%E5%AE%89%E8%A3%85MySQL5-7/" itemprop="url">
-            <span itemprop="name">Centos7在线安装MySQL5.7</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-04T16:24:27+08:00"
-              content="2020-04-04">
-          04-04
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/04/04/centos7%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" itemprop="url">
-            <span itemprop="name">centos7常用命令</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-04T15:48:00+08:00"
-              content="2020-04-04">
-          04-04
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/04/04/bash-jar/" itemprop="url">
-            <span itemprop="name">分享一个好用的jar包执行脚本</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-04T14:53:18+08:00"
-              content="2020-04-04">
-          04-04
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/04/04/offline-install-mysql5-1/" itemprop="url">
-            <span itemprop="name">centos7离线安装mysql5.1.72</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-04T14:16:18+08:00"
-              content="2020-04-04">
-          04-04
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/04/04/gs3101/" itemprop="url">
-            <span itemprop="name">移动吉比特gs3101光猫破解+桥接教程</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar XXX.jar &gt; Log.log 2&gt;&amp;1 &amp; </span><br><span class="line">或者</span><br><span class="line">nohup java -jar XXX.jar &gt;&gt; Log.log 2&gt;&amp;1 &amp; </span><br><span class="line">或者</span><br><span class="line">nohup java -jar XXX.jar &gt; /dev/null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>标准输入文件(stdin)：stdin的文件描述符为0，Unix程序默认从stdin读取数据。</li>
+<li>标准输出文件(stdout)：stdout 的文件描述符为1，Unix程序默认向stdout输出数据。</li>
+<li>标准错误文件(stderr)：stderr的文件描述符为2，Unix程序会向stderr流中写入错误信息。</li>
+<li>屏蔽输出，起到禁止输出作用：/dev/null 是一个特殊的文件，写入到它的内容都会被丢弃；如果尝试从该文件读取内容，那么什么也读不到。但是 /dev/null 文件非常有用，将命令的输出重定向到它，会起到”禁止输出”的效果。</li>
+<li>“&gt; Log.log 2&gt;&amp;1” ：表示将 stdout 和 stderr 合并后重定向到 Log.log</li>
+</ul>
 
     </div>
-  </div>
-  
-  
-  
 
+	<div>
+		
+			
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+
+  <p><span>本文标题:</span>linux使用nohup执行jar</a></p>
+  <p><span>文章作者:</span>durongzhen</a></p>
+  <p><span>发布时间:</span>2020年04月04日 - 16:35:24</p>
+  <p><span>最后更新:</span>2020年04月04日 - 17:32:17</p>
+  <p><span>原始链接:</span><a href="/2020/04/04/linux%E4%BD%BF%E7%94%A8nohup%E6%89%A7%E8%A1%8Cjar/" title="linux使用nohup执行jar">https://durongzhen.github.io/2020/04/04/linux%E4%BD%BF%E7%94%A8nohup%E6%89%A7%E8%A1%8Cjar/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://durongzhen.github.io/2020/04/04/linux%E4%BD%BF%E7%94%A8nohup%E6%89%A7%E8%A1%8Cjar/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-cc"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: '复制成功',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+		
+	</div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/nohup/" rel="tag"># nohup</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/04/%E5%AE%89%E8%A3%85vlmcsd%E6%90%AD%E5%BB%BAKMS%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="prev" title="安装vlmcsd搭建KMS服务器">
+      <i class="fa fa-chevron-left"></i> 安装vlmcsd搭建KMS服务器
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
   
 
 

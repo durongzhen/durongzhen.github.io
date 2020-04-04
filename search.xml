@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Centos7在线安装MySQL5.7</title>
+    <url>/2020/04/04/Centos7%E5%9C%A8%E7%BA%BF%E5%AE%89%E8%A3%85MySQL5-7/</url>
+    <content><![CDATA[<h3 id="一、-下载并安装MySQL官方的-Yum-Repository"><a href="#一、-下载并安装MySQL官方的-Yum-Repository" class="headerlink" title="一、 下载并安装MySQL官方的 Yum Repository"></a>一、 下载并安装MySQL官方的 Yum Repository</h3><pre><code>`wget -i -c http://dev.mysql.com/get/mysql57-community-release-el7-10.noarch.rpm`</code></pre><ul>
+<li><p>使用上面的命令就直接下载了安装用的Yum Repository，大概25KB的样子，然后就可以直接yum安装了</p>
+<p>  <code>yum -y install mysql57-community-release-el7-10.noarch.rpm</code></p>
+</li>
+<li><p>开始安装MySQL服务器：</p>
+<p>  <code>yum -y install mysql-community-server</code></p>
+</li>
+</ul>
+<p>这步可能会花些时间，安装完成后就会覆盖掉之前的mariadb。</p>
+<a id="more"></a>
+
+<h3 id="二、MySQL数据库设置"><a href="#二、MySQL数据库设置" class="headerlink" title="二、MySQL数据库设置"></a>二、MySQL数据库设置</h3><ul>
+<li><p>启动mysql：</p>
+<p>  <code>systemctl start  mysqld.service</code></p>
+</li>
+<li><p>查看运行状态：</p>
+<p>  <code>systemctl status mysqld.service</code></p>
+</li>
+<li><p>此时MySQL已经开始正常运行，不过要想进入MySQL还得先找出此时root用户的密码，通过如下命令可以在日志文件中找出密码：</p>
+<p>  <code>grep &quot;password&quot; /var/log/mysqld.log</code></p>
+</li>
+<li><p>进入数据库：</p>
+<p>  <code>mysql -uroot -p</code></p>
+</li>
+<li><p>输入初始密码，此时不能做任何事情，因为MySQL默认必须修改密码之后才能操作数据库。另外mysql密码有一定规则，我们可以修改参数设置简单规则：</p>
+<p>  <code>mysql&gt; set global validate_password_policy=0;</code></p>
+<p>  <code>mysql&gt; set global validate_password_length=1;</code></p>
+</li>
+<li><p>设置之后此时密码就可以设置的很简单，例如123456之类的。到此数据库的密码设置就完成了。</p>
+<p>  <code>ALTER USER &#39;root&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;123456&#39;;</code></p>
+</li>
+<li><p>最后卸载Yum Repository，因为以后每次yum操作都会自动更新。使用如下命令：</p>
+<p>  <code>yum -y remove mysql57-community-release-el7-10.noarch</code></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>mysql5.7</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>分享一个好用的jar包执行脚本</title>
+    <url>/2020/04/04/bash-jar/</url>
+    <content><![CDATA[<blockquote>
+<p>适合执行jar包使用</p>
+</blockquote>
+<ul>
+<li><h3 id="vim新建文件run，复制以下脚本内容"><a href="#vim新建文件run，复制以下脚本内容" class="headerlink" title="vim新建文件run，复制以下脚本内容"></a>vim新建文件run，复制以下脚本内容</h3></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#这里可替换为你自己的执行程序，其他代码无需更改</span></span><br><span class="line">APP_NAME = XXX.jar</span><br><span class="line"> </span><br><span class="line"><span class="comment">#使用说明，用来提示输入参数</span></span><br><span class="line"><span class="function"><span class="title">usage</span></span>() &#123;</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"Usage: sh 执行脚本.sh [start|stop|restart|status]"</span></span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">#检查程序是否在运行</span></span><br><span class="line"><span class="function"><span class="title">is_exist</span></span>()&#123;</span><br><span class="line">  pid=`ps -ef|grep <span class="variable">$APP_NAME</span>|grep -v grep|awk <span class="string">'&#123;print $2&#125;'</span> `</span><br><span class="line">  <span class="comment">#如果不存在返回1，存在返回0     </span></span><br><span class="line">  <span class="keyword">if</span> [ -z <span class="string">"<span class="variable">$&#123;pid&#125;</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">   <span class="built_in">return</span> 1</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="built_in">return</span> 0</span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#启动方法</span></span><br><span class="line"><span class="function"><span class="title">start</span></span>()&#123;</span><br><span class="line">  is_exist</span><br><span class="line">  <span class="keyword">if</span> [ $? -eq <span class="string">"0"</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"<span class="variable">$&#123;APP_NAME&#125;</span> is already running. pid=<span class="variable">$&#123;pid&#125;</span> ."</span></span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    nohup java -jar <span class="variable">$APP_NAME</span> &gt; /dev/null 2&gt;&amp;1 &amp;</span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">#停止方法</span></span><br><span class="line"><span class="function"><span class="title">stop</span></span>()&#123;</span><br><span class="line">  is_exist</span><br><span class="line">  <span class="keyword">if</span> [ $? -eq <span class="string">"0"</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">kill</span> -9 <span class="variable">$pid</span></span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"<span class="variable">$&#123;APP_NAME&#125;</span> is not running"</span></span><br><span class="line">  <span class="keyword">fi</span>  </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">#输出运行状态</span></span><br><span class="line"><span class="function"><span class="title">status</span></span>()&#123;</span><br><span class="line">  is_exist</span><br><span class="line">  <span class="keyword">if</span> [ $? -eq <span class="string">"0"</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"<span class="variable">$&#123;APP_NAME&#125;</span> is running. Pid is <span class="variable">$&#123;pid&#125;</span>"</span></span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"<span class="variable">$&#123;APP_NAME&#125;</span> is NOT running."</span></span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">#重启</span></span><br><span class="line"><span class="function"><span class="title">restart</span></span>()&#123;</span><br><span class="line">  stop</span><br><span class="line">  start</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">#根据输入参数，选择执行对应方法，不输入则执行使用说明</span></span><br><span class="line"><span class="keyword">case</span> <span class="string">"<span class="variable">$1</span>"</span> <span class="keyword">in</span></span><br><span class="line">  <span class="string">"start"</span>)</span><br><span class="line">    start</span><br><span class="line">    ;;</span><br><span class="line">  <span class="string">"stop"</span>)</span><br><span class="line">    stop</span><br><span class="line">    ;;</span><br><span class="line">  <span class="string">"status"</span>)</span><br><span class="line">    status</span><br><span class="line">    ;;</span><br><span class="line">  <span class="string">"restart"</span>)</span><br><span class="line">    restart</span><br><span class="line">    ;;</span><br><span class="line">  *)</span><br><span class="line">    usage</span><br><span class="line">    ;;</span><br><span class="line"><span class="keyword">esac</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><h3 id="给run文件赋予权限"><a href="#给run文件赋予权限" class="headerlink" title="给run文件赋予权限"></a>给run文件赋予权限</h3><p>  <code>chmod 777 run</code></p>
+</li>
+<li><h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>启动</th>
+<th>关闭</th>
+<th>重启</th>
+<th>状态</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>./run start</code></td>
+<td><code>./run stop</code></td>
+<td><code>./run restart</code></td>
+<td><code>./run status</code></td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>脚本</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>centos7常用命令</title>
+    <url>/2020/04/04/centos7%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<blockquote>
+<p><strong>一些Centos7常用命令，记录下来方便查找</strong></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>程序</th>
+<th>启动</th>
+<th>关闭</th>
+<th>重启</th>
+<th>状态</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>apache</td>
+<td><code>systemctl start httpd</code></td>
+<td><code>systemctl stop httpd</code></td>
+<td><code>systemctl restart httpd</code></td>
+<td><code>systemctl status httpd</code></td>
+</tr>
+<tr>
+<td>mysql</td>
+<td><code>systemctl start mysqld</code></td>
+<td><code>systemctl stop mysqld</code></td>
+<td><code>systemctl restart mysqld</code></td>
+<td><code>systemctl status mysqld</code></td>
+</tr>
+<tr>
+<td>php-fpm</td>
+<td><code>systemctl start php-fpm</code></td>
+<td><code>systemctl stop php-fpm</code></td>
+<td><code>systemctl restart php-fpm</code></td>
+<td><code>systemctl status php-fpm</code></td>
+</tr>
+<tr>
+<td>nginx</td>
+<td><code>systemctl start nginx</code> 或 <code>service nginx start</code> 或 <code>./nginx</code></td>
+<td><code>systemctl stop nginx</code> 或 <code>service nginx stop</code> 或 <code>./nginx -s stop</code></td>
+<td><code>systemctl restart nginx</code> 或 <code>service nginx restart</code> 或 <code>./nginx -s reload</code></td>
+<td><code>systemctl status nginx</code> 或 <code>service status nginx</code></td>
+</tr>
+</tbody></table>
+<a id="more"></a>
+<hr>
+<table>
+<thead>
+<tr>
+<th>作用</th>
+<th>命令</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>查看端口</td>
+<td><code>netstat -lnp | grep 端口号</code></td>
+</tr>
+<tr>
+<td>查程序</td>
+<td><code>ps -ef | grep 程序名</code></td>
+</tr>
+<tr>
+<td>nginx判断配置文件</td>
+<td><code>./nginx -t</code></td>
+</tr>
+<tr>
+<td>设置开机启动(eg:Apache)</td>
+<td><code>systemctl enable httpd.service</code></td>
+</tr>
+<tr>
+<td>关闭开机启动(eg:Apache)</td>
+<td><code>systemctl disable httpd.service</code></td>
+</tr>
+<tr>
+<td>检查是否设置开机自启(eg:Apache)</td>
+<td><code>systemctl list-unit-files | grep httpd</code></td>
+</tr>
+<tr>
+<td>Linux系统版本</td>
+<td><code>lsb_release -a</code></td>
+</tr>
+<tr>
+<td>Linux内核版本</td>
+<td><code>cat /proc/version</code></td>
+</tr>
+<tr>
+<td>查看操作系统版本</td>
+<td><code>head -n 1 /etc/issue</code></td>
+</tr>
+<tr>
+<td>查看CPU信息</td>
+<td><code>cat /proc/cpuinfo</code></td>
+</tr>
+<tr>
+<td>查看计算机名</td>
+<td><code>hostname</code></td>
+</tr>
+<tr>
+<td>查看环境变量资源</td>
+<td><code>env</code></td>
+</tr>
+<tr>
+<td>查看内存使用量和交换区使用量</td>
+<td><code>free -m</code></td>
+</tr>
+<tr>
+<td>查看各分区使用情况</td>
+<td><code>df -h</code></td>
+</tr>
+<tr>
+<td>查看指定目录的大小</td>
+<td><code>du -sh 目录名</code></td>
+</tr>
+<tr>
+<td>查看内存总量</td>
+<td><code>grep MemTotal /proc/meminfo</code></td>
+</tr>
+<tr>
+<td>查看空闲内存量</td>
+<td><code>grep MemFree /proc/meminfo</code></td>
+</tr>
+<tr>
+<td>查看系统运行时间、用户数、负载</td>
+<td><code>uptime</code></td>
+</tr>
+<tr>
+<td>查看系统负载磁盘和分区</td>
+<td><code>cat /proc/loadavg</code></td>
+</tr>
+<tr>
+<td>查看挂接的分区状态</td>
+<td><code>mount | column -t</code></td>
+</tr>
+<tr>
+<td>查看所有分区</td>
+<td><code>fdisk -l</code></td>
+</tr>
+<tr>
+<td>查看所有交换分区</td>
+<td><code>swapon -s</code></td>
+</tr>
+<tr>
+<td>查看所有网络接口的属性</td>
+<td><code>ifconfig</code></td>
+</tr>
+<tr>
+<td>查看路由表</td>
+<td><code>route -n</code></td>
+</tr>
+<tr>
+<td>查看所有监听端口</td>
+<td><code>netstat -lntp</code></td>
+</tr>
+<tr>
+<td>查看所有已经建立的连接</td>
+<td><code>netstat -antp</code></td>
+</tr>
+<tr>
+<td>查看网络统计信息进程</td>
+<td><code>netstat -s</code></td>
+</tr>
+<tr>
+<td>查看所有进程</td>
+<td><code>ps -ef</code></td>
+</tr>
+<tr>
+<td>实时显示进程状态用户</td>
+<td><code>top</code></td>
+</tr>
+<tr>
+<td>查看活动用户</td>
+<td><code>w</code></td>
+</tr>
+<tr>
+<td>查看指定用户信息</td>
+<td><code>id 用户名</code></td>
+</tr>
+<tr>
+<td>查看用户登录日志</td>
+<td><code>last</code></td>
+</tr>
+<tr>
+<td>查看系统所有用户</td>
+<td><code>cut -d: -f1 /etc/passwd</code></td>
+</tr>
+<tr>
+<td>查看系统所有组</td>
+<td><code>cut -d: -f1 /etc/group</code></td>
+</tr>
+<tr>
+<td>列出所有系统服务</td>
+<td><code>chkconfig –list</code></td>
+</tr>
+<tr>
+<td>列出所有启动的系统服务程序</td>
+<td><code>chkconfig –list | grep on</code></td>
+</tr>
+<tr>
+<td>查看所有安装的软件包</td>
+<td><code>rpm -qa</code></td>
+</tr>
+</tbody></table>
+<hr>
+<p>安装PHP 7.0、7.1的yum源，然后再执行安装扩展。</p>
+<p>php 7.0以及扩展:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install php70w php70w-fpm php70w-cli php70w-common php70w-devel php70w-gd php70w-pdo php70w-mysql php70w-mbstring php70w-bcmath php70w-xml php70w-pecl-redis php70w-process php70w-intl php70w-xmlrpc php70w-soap php70w-ldap php70w-opcache</span><br></pre></td></tr></table></figure>
+
+<p>php 7.1以及扩展:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install php71w php71w-fpm php71w-cli php71w-common php71w-devel php71w-gd php71w-pdo php71w-mysql php71w-mbstring php71w-bcmath php71w-xml php71w-pecl-redis php71w-process php71w-intl php71w-xmlrpc php71w-soap php71w-ldap php71w-opcache</span><br></pre></td></tr></table></figure>
+
+<p>php 7.2以及扩展:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install -y php72w php72w-fpm php72w-cli php72w-common php72w-devel php72w-gd php72w-pdo php72w-mysql php72w-mbstring php72w-bcmath php72w-xml php72w-pecl-redis php72w-process php72w-intl php72w-xmlrpc php72w-soap php72w-ldap php72w-opcache</span><br></pre></td></tr></table></figure>
+<hr>
+]]></content>
+      <categories>
+        <category>总结</category>
+      </categories>
+      <tags>
+        <tag>centos7命令</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>移动吉比特gs3101光猫破解+桥接教程</title>
+    <url>/2020/04/04/gs3101/</url>
+    <content><![CDATA[<blockquote>
+<p>该类型光猫通用超级账户如下： 管理员账号：CMCCAdmin 密码：aDm8H%MdA</p>
+</blockquote>
+<p>该账户无效的话是移动下发参数时修改了默认超密，需要通过破解拿到最新密码。</p>
+<h2 id="破解过程："><a href="#破解过程：" class="headerlink" title="破解过程："></a>破解过程：</h2><p>1.开启telnet</p>
+<p>开telnet权限地址：<a href="http://192.168.1.1/cgi-bin/getGateWay.cgi" target="_blank" rel="noopener">http://192.168.1.1/cgi-bin/getGateWay.cgi</a></p>
+<p>telnet账号密码</p>
+<p>telnet_username=”admin”</p>
+<p>telnet_passwd=”s2@We3%Dc#”</p>
+<a id="more"></a>
+
+<p>2.使用telnet登陆查看配置文件</p>
+<p>登陆：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">telnet 192.168.1.1</span><br></pre></td></tr></table></figure>
+
+<p>进入该目录：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /boaroot/html</span><br></pre></td></tr></table></figure>
+
+<p>查看配置文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat romfile.cfg</span><br></pre></td></tr></table></figure>
+
+<p>3.复制另存romfile.cfg文件内容</p>
+<p>查找cmccadmin 即可看到密码</p>
+<p>4.使用超密账号登陆即可看到宽带账号密码。</p>
+<p>参考：</p>
+<p><a href="https://www.right.com.cn/forum/thread-415706-1-1.html" target="_blank" rel="noopener">https://www.right.com.cn/forum/thread-415706-1-1.html</a></p>
+<p><a href="https://www.52pojie.cn/thread-1094265-2-1.html" target="_blank" rel="noopener">https://www.52pojie.cn/thread-1094265-2-1.html</a></p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>gs3101</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>linux使用nohup执行jar</title>
+    <url>/2020/04/04/linux%E4%BD%BF%E7%94%A8nohup%E6%89%A7%E8%A1%8Cjar/</url>
+    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">java -jar XXX.jar &amp;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>命令结尾没有 “&amp;”，则变成 “java -jar XXX.jar，表示在当前ssh窗口，可按CTRL + C打断程序运行，或者直接关闭窗口，则程序直接退出。</li>
+<li>命令结尾添加 “&amp;” ，则变成 “java -jar XXX.jar &amp;”，表示在当窗口关闭时，程序才会中止运行。&amp;代表让该命令在后台执行。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nohup java -jar XXX.jar &gt; Log.log &amp; </span><br><span class="line">或者</span><br><span class="line">nohup java -jar XXX.jar &gt;&gt; Log.log &amp;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>命令 “nohup java -jar XXX.jar &amp;” 部分，表示不挂断运行命令,当账户退出或终端关闭时,程序仍然运行。注意，该作业的所有输出被重定向到nohup.out的文件中。</li>
+<li>命令 “nohup java -jar XXX.jar &gt; Log.log &amp;” 部分，表示不挂断运行命令,当账户退出或终端关闭时,程序仍然运行，并且该作业的所有输出被重定向到Log.log的文件中。“ &gt; Log.log ” 该命令就是指定日志输出的文件。</li>
+<li>“&gt;&gt;”表示将输出以追加的方式重定向到Log.log中。</li>
+</ul>
+<a id="more"></a>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nohup java -jar XXX.jar &gt; Log.log 2&gt;&amp;1 &amp; </span><br><span class="line">或者</span><br><span class="line">nohup java -jar XXX.jar &gt;&gt; Log.log 2&gt;&amp;1 &amp; </span><br><span class="line">或者</span><br><span class="line">nohup java -jar XXX.jar &gt; /dev/null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>标准输入文件(stdin)：stdin的文件描述符为0，Unix程序默认从stdin读取数据。</li>
+<li>标准输出文件(stdout)：stdout 的文件描述符为1，Unix程序默认向stdout输出数据。</li>
+<li>标准错误文件(stderr)：stderr的文件描述符为2，Unix程序会向stderr流中写入错误信息。</li>
+<li>屏蔽输出，起到禁止输出作用：/dev/null 是一个特殊的文件，写入到它的内容都会被丢弃；如果尝试从该文件读取内容，那么什么也读不到。但是 /dev/null 文件非常有用，将命令的输出重定向到它，会起到”禁止输出”的效果。</li>
+<li>“&gt; Log.log 2&gt;&amp;1” ：表示将 stdout 和 stderr 合并后重定向到 Log.log</li>
+</ul>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>nohup</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>安装vlmcsd搭建KMS服务器</title>
+    <url>/2020/04/04/%E5%AE%89%E8%A3%85vlmcsd%E6%90%AD%E5%BB%BAKMS%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
+    <content><![CDATA[<blockquote>
+<p>vlmcsd搭建的KMS激活服务器，可以激活Windows和office（VL版）<br>微软原版镜像下载地址：<a href="https://msdn.itellyou.cn/" target="_blank" rel="noopener" title="https://msdn.itellyou.cn/">https://msdn.itellyou.cn/</a></p>
+</blockquote>
+<h3 id="搭建步骤："><a href="#搭建步骤：" class="headerlink" title="搭建步骤："></a>搭建步骤：</h3><ul>
+<li>下载vlmcsd文件：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://github.com/Wind4/vlmcsd/releases/download/svn1112/binaries.tar.gz</span><br></pre></td></tr></table></figure></li>
+<li>解压：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -xzvf binaries.tar.gz</span><br></pre></td></tr></table></figure></li>
+<li>进入目录：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> binaries/Linux/intel/static</span><br></pre></td></tr></table></figure></li>
+<li>64位系统执行：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./vlmcsd-x64-musl-static</span><br></pre></td></tr></table></figure></li>
+<li>查看vlmcsd运行状态：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ps -ef | grep vlmcsd-x64-musl-static</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+
+</li>
+</ul>
+<p><strong><em>注意：vlmcsd需要用到1688端口，如果你的机器防火墙打开了，需要设置放行规则或者关闭防火墙。</em></strong></p>
+<h3 id="使用步骤："><a href="#使用步骤：" class="headerlink" title="使用步骤："></a>使用步骤：</h3><p>在需要激活的电脑上以管理员运行cmd，输入以下指令。</p>
+<h4 id="Windows激活步骤："><a href="#Windows激活步骤：" class="headerlink" title="Windows激活步骤："></a>Windows激活步骤：</h4><ol>
+<li><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">slmgr /skms 这里填写你的VPS公网IP或是解析到此IP的域名</span><br></pre></td></tr></table></figure></li>
+<li><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">slmgr /ato</span><br></pre></td></tr></table></figure></li>
+<li><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">slmgr /xpr</span><br></pre></td></tr></table></figure>
+重启即可激活。</li>
+</ol>
+<h4 id="Office激活步骤："><a href="#Office激活步骤：" class="headerlink" title="Office激活步骤："></a>Office激活步骤：</h4><ul>
+<li><p>找到你的office安装目录，比如C:\Program Files (x86)\Microsoft Office\Office16</p>
+<p>  该目录下面应该有个OSPP.VBS，接下来我们就cd到这个目录下面。</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> C:\Program Files (x86)\Microsoft Office\Office16</span><br></pre></td></tr></table></figure></li>
+<li><p>执行注册kms服务器地址：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cscript ospp.vbs /sethst:这里填写你的VPS公网IP或是解析到此IP的域名</span><br></pre></td></tr></table></figure></li>
+<li><p>一般来说，“一句命令已经完成了”，但一般office不会马上连接kms服务器进行激活，所以我们额外补充一条手动激活命令：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cscript ospp.vbs /act</span><br></pre></td></tr></table></figure>
+<p>  如果提示看到successful的字样，那么就是激活成功了，重新打开office就好。</p>
+</li>
+</ul>
+<h3 id="注意：你的Windows-OFFICE一定要是VL版本才能被激活！"><a href="#注意：你的Windows-OFFICE一定要是VL版本才能被激活！" class="headerlink" title="注意：你的Windows/OFFICE一定要是VL版本才能被激活！"></a>注意：你的Windows/OFFICE一定要是VL版本才能被激活！</h3>]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>vlmcsd</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>centos7离线安装mysql5.1.72</title>
+    <url>/2020/04/04/offline-install-mysql5-1/</url>
+    <content><![CDATA[<blockquote>
+<p>本文主要记录centos7离线安装mysql-5.1.72，用于没有联网环境下部署使用。</p>
+</blockquote>
+<p><strong>安装前请先卸载centos7自带的Mariadb。</strong></p>
+<ul>
+<li>查询命令 rpm -qa | grep mariadb</li>
+<li>卸载命令 rpm -e –nodeps 文件名</li>
+</ul>
+<ol>
+<li>使用xshell连接服务器，将mysql-5.1.72-linux-x86_64-glibc23.tar.gz 源程序拷贝到目录 /usr/local 并解压。<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar –xzvf mysql-5.1.72-linux-x86_64-glibc23.tar.gz</span><br></pre></td></tr></table></figure></li>
+<li>建立源软件目录与mysql目录软连接(/usr/local目录下操作)<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ln -s mysql-5.1.72-linux-x86_64-glibc23 mysql</span><br></pre></td></tr></table></figure></li>
+<li>建立系统目录/usr/bin与mysql目录软连接<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ln -s /usr/<span class="built_in">local</span>/mysql/bin/mysql /usr/bin</span><br></pre></td></tr></table></figure></li>
+<li>添加一个系统用户，不创建目录，不允许用户登录。只是用户运行 mysql这个进程使用。<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">useradd -r -s /sbin/nologin mysql </span><br><span class="line">id mysql (查询是否建立成功)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<a id="more"></a>
+
+<ol start="5">
+<li><p>配置my.cnf</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/mysql</span><br><span class="line">cp support-files/my-medium.cnf /etc/my.cnf</span><br><span class="line">vi /etc/my.cnf</span><br></pre></td></tr></table></figure>
+<p>在[mysqld]部分末尾添加<code>basedir = /usr/local/mysql</code>以及 <code>datadir = /usr/local/mysql/data</code></p>
+</li>
+<li><p>修改mysql文件夹权限为mysql</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chown -R mysql:mysql /usr/<span class="built_in">local</span>/mysql</span><br></pre></td></tr></table></figure></li>
+<li><p>安装、初始化数据库</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./scripts/mysql_install_db --user=mysql --basedir=/usr/<span class="built_in">local</span>/mysql --datadir=/usr/<span class="built_in">local</span>/mysql/data</span><br></pre></td></tr></table></figure></li>
+<li><p>复制启动脚本到资源目录</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cp ./support-files/mysql.server /etc/rc.d/init.d/mysqld</span><br></pre></td></tr></table></figure></li>
+<li><p>增加mysqld服务控制脚本执行权限</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chmod +x /etc/rc.d/init.d/mysqld</span><br></pre></td></tr></table></figure></li>
+<li><p>将mysqld服务加入到系统服务</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chkconfig --add mysqld</span><br></pre></td></tr></table></figure></li>
+<li><p>检查mysqld服务是否已经生效</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chkconfig --list mysqld</span><br></pre></td></tr></table></figure></li>
+<li><p>启动mysql</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">service mysqld start</span><br></pre></td></tr></table></figure></li>
+<li><p>mysql权限收回给root(可选)</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chown -R root:root /usr/<span class="built_in">local</span>/mysql</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+</search>
